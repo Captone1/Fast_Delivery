@@ -1,11 +1,14 @@
 @extends('layouts.app')
-
+@section('js')
+    <!-- Page Specific JS File -->
+    <script src="{{asset('backend')}}/assets/js/page/index.js"></script>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard  ') }}</div>
+                <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +17,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    You are logged in!
                 </div>
             </div>
         </div>

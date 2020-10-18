@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -29,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -75,7 +74,7 @@ class RegisterController extends Controller
             'address'=> $data['address'],
             'password' => Hash::make($data['password']),
             'avatar' => $avatar,
-            'role' => isset($data['role']) ? $data['role'] : 'sender',
+            'role' => isset($data['role']) ? $data['role'] : 'customer',
             'transport_id' => isset($data['transport_id']) ? $data['transport_id'] : 1
         ]);
     }

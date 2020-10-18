@@ -1,9 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +10,47 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-});
-
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 Auth::routes();
 Route::group(['namespace' => 'Frontend'],function (){
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('home', 'HomeController@index');
-zzzzzz
+
+    // Route::get('tra-cuu-van-don', 'HomeController@search')->name('search');
+
+    Route::group(['middleware' => 'auth'],function (){
+        Route::get('profile', 'HomeController@profile')->name('profile');
+    });
+
+});
+
+Route::group(['prefix'=>'admin','namespace' => 'Backend','middleware' => ['auth','check_role']],function (){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::group(['prefix'=>'bill'],function (){
+
+    });
+    Route::group(['prefix'=>'staff'],function (){
+        Route::get('/', 'UserController@staffList')->name('admin.staff.staffList');
+    });
+    Route::group(['prefix'=>'city'],function (){
+        Route::get('/', 'CityController@staffList')->name('admin.city.index');
+    });
+    Route::group(['prefix'=>'user'],function (){
+        Route::get('/', 'UserController@index')->name('admin.user.index');
+        Route::get('seller', 'UserController@seller')->name('admin.user.seller');
+        Route::get('create', 'UserController@create')->name('admin.user.create');
+        Route::get('profile/{id}', 'UserController@profile')->name('admin.user.profile');
+        // Route::get('delete/{id}', 'UserController@delete')->name('admin.user.delete');
+
+        Route::post('create', 'UserController@postCreate')->name('admin.user.postCreate');
+        Route::post('update/{id}', 'UserController@postUpdate')->name('admin.user.postUpdate');
+        Route::post('update-password/{id}', 'UserController@updatePassword')->name('admin.user.updatePassword');
+        Route::post('update-avatar/{id}', 'UserController@updateAvatar')->name('admin.user.updateAvatar');
+    });
+    Route::group(['prefix'=>'province'],function (){
+        Route::get('/', 'ProvinceController@index')->name('admin.province.index');
+    
+    });
+
+});

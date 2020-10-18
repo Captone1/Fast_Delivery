@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.auth')
+@section('title') Login @endsection
 @section('content')
     <div class="container mt-5">
         <div class="row">
@@ -36,7 +37,6 @@
                                     </span>
                                 @enderror
                             </div>
-                            <a href="#">Forgot password?</a>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                                     Đăng Nhập
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="mt-5 text-muted text-center">
-                Nếu bạn chưa có tài khoản...<a href="{{route('register')}}">Đăng ký</a>
+                    Nếu bạn chưa có tài khoản... <a href="{{route('register')}}">Đăng ký</a>
                 </div>
             </div>
         </div>
